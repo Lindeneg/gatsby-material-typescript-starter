@@ -1,5 +1,5 @@
 export const setCookie = (cookie: string, value: string): void => {
-    document.cookie = `${cookie}=${value}`;
+    document.cookie = `${cookie}=${value}; path=/`;
 };
 
 export const getCookie = (cookie: string): string | null => {
