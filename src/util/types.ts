@@ -2,7 +2,10 @@ import React from 'react';
 
 type DefaultProps = Record<string, never>;
 
-type Props<P = DefaultProps> = {
+export type OptionalChild<T = React.ReactNode> = { children?: T };
+export type RequiredChild<T = React.ReactNode> = Required<OptionalChild<T>>;
+
+export type Props<P = DefaultProps> = {
     [K in keyof P]: P[K];
 };
 
@@ -14,13 +17,13 @@ export type FC<P = DefaultProps> = (props: P) => React.ReactElement | null;
 /**
  * Component with optional children.
  */
-export type FCC<P = DefaultProps> = (
-    props: Props<P> & { children?: React.ReactNode }
+export type FCC<P = DefaultProps, C = React.ReactNode> = (
+    props: Props<P> & OptionalChild<C>
 ) => React.ReactElement | null;
 
 /**
  * Component with required children.
  */
-export type FCR<P = Record<string, never>> = (
-    props: Props<P> & { children: React.ReactNode }
+export type FCR<P = DefaultProps, C = React.ReactNode> = (
+    props: Props<P> & RequiredChild<C>
 ) => React.ReactElement | null;
