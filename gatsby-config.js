@@ -3,11 +3,11 @@ module.exports = {
     title: `Gatsby Typescript blog Starter`,
     description: `A simple blog starter using Typescript in front & back side with eslint & prettier.`,
     author: {
-      name: 'Julien CARON',
-      content: 'I like build some things using Javascript',
+      name: `Christian`,
+      content: `I like build some things using TypeScript`,
     },
     social: {
-      github: 'https://github.com/Junscuzzy',
+      github: `https://github.com/Lindeneg`,
     },
   },
   plugins: [
@@ -23,13 +23,9 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-layout`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
-        // Puts script in the head instead of the body
-        head: false,
-        // Setting this parameter is optional
-        anonymize: true,
+        component: require.resolve(`./src/components/layout/index.tsx`),
       },
     },
     {

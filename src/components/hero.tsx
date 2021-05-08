@@ -1,40 +1,36 @@
-import React, { FC } from 'react'
-import { makeStyles } from '@material-ui/styles'
-import { Typography, Container, Theme } from '@material-ui/core'
+import React from 'react';
+import { makeStyles } from '@material-ui/styles';
+import { Typography, Container, Theme } from '@material-ui/core';
+
+import { FCC } from '../util';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-}))
+    heroContent: {
+        backgroundColor: theme.palette.secondary.main,
+        padding: theme.spacing(8, 0, 6)
+    }
+}));
 
 export interface HeroProps {
-  title: string
-  description?: string
+    title: string;
+    description?: string;
 }
 
-const Hero: FC<HeroProps> = ({ title, description = '', children }) => {
-  const classes = useStyles()
-  return (
-    <div className={classes.heroContent}>
-      <Container maxWidth="sm">
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="textPrimary"
-          gutterBottom
-        >
-          {title}
-        </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          {description}
-        </Typography>
-        {children}
-      </Container>
-    </div>
-  )
-}
+const Hero: FCC<HeroProps> = (props) => {
+    const styles = useStyles();
+    return (
+        <div className={styles.heroContent}>
+            <Container maxWidth="sm">
+                <Typography component="h1" variant="h2" align="center" gutterBottom>
+                    {props.title}
+                </Typography>
+                <Typography variant="h5" align="center" paragraph>
+                    {props.description || ''}
+                </Typography>
+                {props.children}
+            </Container>
+        </div>
+    );
+};
 
-export default Hero
+export default Hero;
