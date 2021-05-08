@@ -3,9 +3,7 @@ import { Link as GatsbyLink } from 'gatsby';
 import { Grid, Button, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import SEO from '../components/seo';
-import Hero from '../components/hero';
-import Lazy from '../components/lazy/lazy';
+import { Seo, Hero, Lazy } from '../components';
 import { FC } from '../util';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -18,7 +16,7 @@ const IndexPage: FC = () => {
     const styles = useStyles();
     return (
         <>
-            <SEO title="Home" />
+            <Seo title="Home" />
             <Lazy type="grow" delay={500} timeout={1000} mountOnEnter unmountOnExit>
                 <Hero
                     title="Hi people"

@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import { FC } from '../util';
+import { FC } from '../../util';
 
 type MetaProperty = {
     property: string;

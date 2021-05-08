@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Typography, Container, Theme } from '@material-ui/core';
 
-import { FCC } from '../util';
+import { FCC } from '../../util';
 
 const useStyles = makeStyles((theme: Theme) => ({
     heroContent: {
