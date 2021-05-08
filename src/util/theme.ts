@@ -67,8 +67,8 @@ const dark: ThemeOptions = {
             disabled: '#ccc'
         },
         background: {
-            default: '#151515',
-            paper: '#1c0a21'
+            default: '#1c2c33',
+            paper: '#162024'
         }
     }
 };
