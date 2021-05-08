@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import SEO from '../components/seo';
 import Hero from '../components/hero';
+import Lazy from '../components/lazy/lazy';
 import { FC } from '../util';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -18,26 +19,30 @@ const IndexPage: FC = () => {
     return (
         <>
             <SEO title="Home" />
-            <Hero
-                title="Hi people"
-                description="Welcome to your new Gatsby site. Now go build something great with
+            <Lazy type="grow" delay={500} timeout={1000} mountOnEnter unmountOnExit>
+                <Hero
+                    title="Hi people"
+                    description="Welcome to your new Gatsby site. Now go build something great with
           Typescript and Material-ui."
-            >
-                <div className={styles.heroButtons}>
-                    <Grid container spacing={2} justify="center">
-                        <Grid item>
-                            <Button
-                                component={GatsbyLink}
-                                to="/page-two/"
-                                variant="contained"
-                                color="primary"
-                            >
-                                Go to page 2
-                            </Button>
+                >
+                    <div className={styles.heroButtons}>
+                        <Grid container spacing={2} justify="center">
+                            <Grid item>
+                                <Lazy type="slide" direction="left" delay={500}>
+                                    <Button
+                                        component={GatsbyLink}
+                                        to="/page-two/"
+                                        variant="contained"
+                                        color="primary"
+                                    >
+                                        Go to page 2
+                                    </Button>
+                                </Lazy>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </div>
-            </Hero>
+                    </div>
+                </Hero>
+            </Lazy>
         </>
     );
 };
