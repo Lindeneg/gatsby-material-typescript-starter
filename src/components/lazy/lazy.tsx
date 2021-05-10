@@ -14,9 +14,9 @@ import {
 
 import { RequiredChild } from '../../util';
 
-type LazyTypes = 'collapse' | 'fade' | 'grow' | 'slide' | 'zoom';
+export type LazyTypes = 'collapse' | 'fade' | 'grow' | 'slide' | 'zoom';
 
-type LazyType<T extends LazyTypes> = { type: T; delay: number };
+type LazyType<T extends LazyTypes> = { type: T; delay?: number; in?: boolean; dry?: boolean };
 
 type LazyProps<T extends LazyTypes> = LazyType<T> &
     RequiredChild<React.ReactElement | undefined> &
@@ -32,52 +32,62 @@ type LazyProps<T extends LazyTypes> = LazyType<T> &
             : T extends 'zoom'
             ? ZoomProps
             : Record<string, never>,
-        'children'
+        'children' | 'in'
     >;
 
 function Lazy<T extends LazyTypes>(props: LazyProps<T>): React.ReactElement | null {
     const [show, setShow] = useState<boolean>(false);
 
-    const timer = setTimeout(() => {
-        setShow(true);
-    }, props.delay);
+    const timer =
+        typeof props.delay === 'number'
+            ? setTimeout(() => {
+                  setShow(true);
+              }, props.delay)
+            : null;
 
     useEffect(() => {
         return () => {
-            clearTimeout(timer);
+            if (timer !== null) {
+                clearTimeout(timer);
+            }
         };
     }, [timer]);
 
-    const children = <div style={{ overflow: 'hidden' }}>{props.children}</div>;
+    if (props.dry === true) {
+        return props.children;
+    }
 
+    const children = <div style={{ overflow: 'hidden' }}>{props.children}</div>;
+    const view = typeof props.in !== 'undefined' ? props.in : show;
+    const baseProps = { ...props, dry: undefined };
     switch (props.type) {
         case 'collapse':
             return (
-                <Collapse {...(props as CollapseProps)} in={show}>
+                <Collapse {...(baseProps as CollapseProps)} in={view}>
                     {children}
                 </Collapse>
             );
         case 'fade':
             return (
-                <Fade {...(props as FadeProps)} in={show}>
+                <Fade {...(baseProps as FadeProps)} in={view}>
                     {children}
                 </Fade>
             );
         case 'grow':
             return (
-                <Grow {...(props as GrowProps)} in={show}>
+                <Grow {...(baseProps as GrowProps)} in={view}>
                     {children}
                 </Grow>
             );
         case 'slide':
             return (
-                <Slide {...(props as SlideProps)} in={show}>
+                <Slide {...(baseProps as SlideProps)} in={view}>
                     {children}
                 </Slide>
             );
         case 'zoom':
             return (
-                <Zoom {...(props as ZoomProps)} in={show}>
+                <Zoom {...(baseProps as ZoomProps)} in={view}>
                     {children}
                 </Zoom>
             );
