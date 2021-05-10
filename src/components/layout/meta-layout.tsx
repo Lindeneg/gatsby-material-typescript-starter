@@ -1,9 +1,9 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 
+import useSiteMetadata from '../../hooks/useSiteMetadata';
 import Header from './header';
 import Footer from './footer';
-import useSiteMetadata from '../../hooks/useSiteMetadata';
 import { FCR } from '../../util';
 
 const useStyles = makeStyles((theme: Theme) => ({

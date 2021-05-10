@@ -1,7 +1,25 @@
+import deepMerge from 'deepmerge';
 import { createMuiTheme, responsiveFontSizes, ThemeOptions, Theme } from '@material-ui/core/styles';
 
 const makeTheme = (variant: ThemeOptions): Theme => {
-    const theme = createMuiTheme(variant);
+    const common = {
+        overrides: {
+            MuiCssBaseline: {
+                '@global': {
+                    '*::-webkit-scrollbar': {
+                        width: '0.5rem'
+                    },
+                    '*::-webkit-scrollbar-thumb': {
+                        background: '#888'
+                    },
+                    '*::-webkit-scrollbar-thumb:hover': {
+                        background: '#555'
+                    }
+                }
+            }
+        }
+    };
+    const theme = createMuiTheme(deepMerge(common, variant));
     return responsiveFontSizes(theme);
 };
 
@@ -15,7 +33,7 @@ const light: ThemeOptions = {
             main: '#7cd2f7'
         },
         error: {
-            main: '#fa6969'
+            main: '#f03e3e'
         },
         warning: {
             main: '#f0a04f'

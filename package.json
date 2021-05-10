@@ -30,6 +30,7 @@
     },
     "dependencies": {
         "@material-ui/core": "^4.11.4",
+        "deepmerge": "^4.2.2",
         "gatsby": "^3.4.2",
         "gatsby-plugin-layout": "^2.4.0",
         "gatsby-plugin-manifest": "^3.4.0",
