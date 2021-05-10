@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import { AppBar, Toolbar, Typography, Link, Button, Tooltip } from '@material-ui/core';
-import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import { BsToggleOn, BsToggleOff } from 'react-icons/bs';
 
-import { FC } from '../../util';
+import { FC, getCookie, themeCookie } from '../../util';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -25,8 +25,16 @@ export interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = (props) => {
+    const [themeType, setThemeType] = useState<string>(getCookie(themeCookie) || 'light');
     const styles = useStyles();
-    const theme = useTheme();
+
+    const onToggle = (): void => {
+        setThemeType((prev) => {
+            return prev === 'dark' ? 'light' : 'dark';
+        });
+        props.switchTheme();
+    };
+
     return (
         <AppBar component="header" position="static" className={styles.root}>
             <Toolbar>
@@ -36,11 +44,11 @@ const Header: FC<HeaderProps> = (props) => {
                     </Link>
                 </Typography>
                 <Tooltip title="switch theme">
-                    <Button onClick={props.switchTheme}>
-                        {theme.palette.type === 'dark' ? (
-                            <BsToggleOff size="40" />
-                        ) : (
+                    <Button onClick={onToggle}>
+                        {themeType === 'light' ? (
                             <BsToggleOn size="40" />
+                        ) : (
+                            <BsToggleOff size="40" />
                         )}
                     </Button>
                 </Tooltip>
