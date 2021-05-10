@@ -9,6 +9,8 @@ export type Props<P = DefaultProps> = {
     [K in keyof P]: P[K];
 };
 
+// Typing with React.FC always opens components to take children, which is not always wanted.
+
 /**
  * Component with no children.
  */

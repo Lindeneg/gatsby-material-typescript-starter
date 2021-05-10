@@ -3,6 +3,7 @@
     "private": true,
     "description": "A simple starter using Typescript & Material-ui",
     "version": "0.1.0",
+    "homepage": "https://gatsby-material-typescript-starter.vercel.app",
     "author": {
         "name": "Christian Lindeneg",
         "email": "hi@lindeneg.org",
@@ -10,6 +11,7 @@
     },
     "keywords": [
         "gatsby",
+        "gatsby-plugin",
         "typescript",
         "eslint",
         "prettier",
